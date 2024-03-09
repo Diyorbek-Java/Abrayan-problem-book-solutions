@@ -9,8 +9,13 @@ public class Solution10 {
         double a = scanner.nextDouble();
         System.out.print("Enter Second number B = ");
         double b = scanner.nextDouble();
-        double sum=a+b;
-        double difference=Math.round(a-b);
+        double sum = a + b;
+        double difference = Math.abs(a - b);
+        double product = a * b;
+        double quotient = Math.sqrt(a) / Math.sqrt(b);
+        System.out.printf("With in the given numbers(%s,%s) sum = %s,difference = %s,", a, b, sum, difference);
+        System.out.printf("\nproduct = %s,quotient of their squares = %s ", product, quotient);
+
 
     }
 }
