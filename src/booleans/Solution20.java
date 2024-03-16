@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Solution20 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Solution needs three-digit input number and it checks ");
+        System.out.println("Solution needs three-digit input number and it checks whether The All digits are different or not in number ");
         System.out.print("Enter Number : ");
         int number = scanner.nextInt();
         int digit1 = number / 100;
