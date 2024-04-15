@@ -18,6 +18,7 @@ public class Solution003 {
         System.out.println(Arrays.toString(sequence));
         scanner.close();
     }
+
     public static double[] generateSequence(int N, double A, double D) {
         double[] sequence = new double[N];
         for (int i = 0; i < N; i++) {

@@ -21,7 +21,6 @@ public class Solution004 {
 
         System.out.println("Initial terms of the geometric sequence:");
         System.out.println(Arrays.toString(sequence));
-        scanner.close();
     }
 
     public static double[] generateSequence(int N, double A, double R) {

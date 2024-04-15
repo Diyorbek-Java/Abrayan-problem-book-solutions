@@ -6,6 +6,11 @@ import java.util.Scanner;
 public class Solution006 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("""
+                Given three integers N (> 2), A, B, create and output an array of
+                N integers such that the first element is equal to A, the second one is equal to B,
+                and each subsequent element is equal to the sum of all previous ones.
+                """);
         System.out.print("Enter the number (N): ");
         int N = scanner.nextInt();
         System.out.print("Enter the number (A): ");

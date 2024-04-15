@@ -6,30 +6,27 @@ import java.util.Scanner;
 public class Solution007 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter the number (N): ");
-        int N = scanner.nextInt();
-        System.out.print("Enter the number (A): ");
-        int A = scanner.nextInt();
-        System.out.print("Enter the number (B): ");
-        int B = scanner.nextInt();
+        System.out.println("""
+                 Given an array of N real numbers, output its elements in inverse order.
+                """);
+        System.out.print("Enter the size of the array: ");
+        int n = scanner.nextInt();
+        double[] numbers = new double[n];
+        System.out.println("Enter the elements in inverse order: ");
+        for (int i = 0; i < n; i++)
+            numbers[i] = scanner.nextDouble();
 
+        System.out.println("Original array:");
+        System.out.println(Arrays.toString(numbers));
 
-        int[] sequence = generateSequence(N, A, B);
-
-        System.out.println("Array generated:");
-        System.out.println(Arrays.toString(sequence));
+        System.out.println("Array in reverse order:");
+        printInReverse(numbers);
         scanner.close();
     }
 
-    public static int[] generateSequence(int N, int A, int B) {
-        int[] sequence = new int[N];
-        sequence[0] = A;
-        sequence[1] = B;
-
-        for (int i = 2; i < N; i++) {
-            sequence[i] = sequence[i - 1] + sequence[i - 2];
+    public static void printInReverse(double[] array) {
+        for (int i = array.length - 1; i >= 0; i--) {
+            System.out.println(array[i]);
         }
-
-        return sequence;
     }
 }
