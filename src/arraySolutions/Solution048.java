@@ -1,14 +1,15 @@
 package arraySolutions;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
-public class Solution044 {
+public class Solution048 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("""
-                An array of N integers is given, the array contains two elements with equal values.
-                Find these elements and output their order numbers in ascending order.
+                Given an array of N integers, find the maximal amount of its elements with equal values.
                 """);
         System.out.print("Enter the number of elements in the array: ");
         int N = scanner.nextInt();
@@ -19,22 +20,27 @@ public class Solution044 {
             array[i] = scanner.nextInt();
         }
         scanner.close();
-        System.out.println("Given Array: ");
+        System.out.println("Given array: ");
         System.out.println(Arrays.toString(array));
-        int[] equalValues = findEqualValues(array);
-        System.out.printf("The order of equal elements are %s", Arrays.toString(equalValues));
+
+        int[] mostRepeatedElement = findMaximalAmountOfElements(array);
+        System.out.printf("The most repeated element in the array is: %d it is repeated %d times", mostRepeatedElement[0], mostRepeatedElement[1]);
+
     }
 
-    public static int[] findEqualValues(int[] array) {
+    public static int[] findMaximalAmountOfElements(int[] array) {
         int[] result = new int[2];
+        if (array == null || array.length == 0) return result;
+        int count = array.length;
         for (int i = 0; i < array.length; i++) {
-            for (int j = i + 1; j < array.length; j++) {
+            for (int j = 0; j < array.length; j++) {
                 if (array[i] == array[j]) {
+                    count++;
                     result[0] = i;
-                    result[1] = j;
                 }
             }
         }
+        result[1] = count;
         return result;
     }
 

@@ -1,14 +1,15 @@
 package arraySolutions;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
-public class Solution043 {
+public class Solution047 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("""
-                Given an array of N integers whose values are in ascending or in descending order,
-                find the amount of its elements with distinct values.
+                Given an array of N integers, find the amount of its elements with distinct values.
                 """);
         System.out.print("Enter the number of elements in the array: ");
         int N = scanner.nextInt();
@@ -19,8 +20,6 @@ public class Solution043 {
             array[i] = scanner.nextInt();
         }
         scanner.close();
-        System.out.println("Given Array: ");
-        System.out.println(Arrays.toString(array));
 
         int distinctCount = countDistinctElements(array);
 
@@ -29,15 +28,13 @@ public class Solution043 {
     }
 
     public static int countDistinctElements(int[] array) {
-        int distinctCount = 1;
+        Set<Integer> uniqueElements = new HashSet<>();
 
-        for (int i = 1; i < array.length; i++) {
-            if (array[i] != array[i - 1]) {
-                distinctCount++;
-            }
+        for (int i = 0; i < array.length; i++) {
+            uniqueElements.add(array[i]);
         }
 
-        return distinctCount;
+        return uniqueElements.size();
     }
 
 }
