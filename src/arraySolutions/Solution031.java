@@ -3,11 +3,11 @@ package arraySolutions;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Solution030 {
+public class Solution031 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("""
-                An array of N real numbers is given. Find the order numbers of array elements that are greater than their right neighbor.
+                An array of N real numbers is given. Find the order numbers of array elements that are greater than their Left neighbor.
                 Output these order numbers in ascending order and also output the amount of such elements.
                 """);
         System.out.print("Enter the number of elements in the array: ");
@@ -19,7 +19,7 @@ public class Solution030 {
             array[i] = scanner.nextDouble();
         }
         scanner.close();
-        double[] result = findElementsGraterThanRightNeighbour(array);
+        double[] result = findElementsGraterThanLeftNeighbour(array);
         Arrays.sort(result);
         System.out.println("Array in given order: ");
         System.out.println(Arrays.toString(array));
@@ -29,11 +29,11 @@ public class Solution030 {
 
     }
 
-    public static double[] findElementsGraterThanRightNeighbour(double[] array) {
+    public static double[] findElementsGraterThanLeftNeighbour(double[] array) {
         double[] result = new double[array.length];
         int counter = 0;
-        for (int i = 1; i < array.length+1; i++) {
-            if (array[i] > array[i+1]) {
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] > array[i - 1]) {
                 result[counter++] = array[i];
             }
         }
