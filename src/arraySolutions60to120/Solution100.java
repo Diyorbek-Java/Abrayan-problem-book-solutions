@@ -1,16 +1,16 @@
 package arraySolutions60to120;
 
-import java.util.Arrays;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
-public class Solution095 {
+public class Solution100 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("""
-                Given an array of N integers, remove all successive equal elements
-                (except for their first occurrence) from the array.
+                Given an array of N integers, remove all elements whose values appear exactly twice in the
+                array. Output the size of the changed array and all its elements.
                 """);
 
         System.out.print("Enter the array size N:  ");
@@ -26,21 +26,33 @@ public class Solution095 {
         System.out.println("The given array is: ");
         System.out.println(Arrays.toString(arrayA));
 
-        arrayA = removeSuccessiveEqualElements(arrayA);
+        arrayA = removeExactlyTwice(arrayA);
         System.out.printf("The worked array size is %d and Elements are ", arrayA.length);
         System.out.println(Arrays.toString(arrayA));
     }
 
-    public static int[] removeSuccessiveEqualElements(int[] array) {
+    public static int[] removeExactlyTwice(int[] array) {
+        Arrays.sort(array);
 
         List<Integer> resultList = new ArrayList<>();
-        resultList.add(array[0]);
 
-        // Iterate through the array and add elements to the list
-        // only if they are different from the previous element
+        int count = 1;
         for (int i = 1; i < array.length; i++) {
-            if (array[i] != array[i - 1]) {
-                resultList.add(array[i]);
+            if (array[i] == array[i - 1]) {
+                count++;
+            } else {
+                if (count != 2) {
+                    for (int j = 0; j < count; j++) {
+                        resultList.add(array[i - 1]);
+                    }
+                }
+                count = 1;
+            }
+        }
+
+        if (count != 2) {
+            for (int j = 0; j < count; j++) {
+                resultList.add(array[array.length - 1]);
             }
         }
 
@@ -51,6 +63,4 @@ public class Solution095 {
 
         return resultArray;
     }
-
-
 }

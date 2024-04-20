@@ -1,17 +1,13 @@
 package arraySolutions60to120;
 
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class Solution095 {
+public class Solution096 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("""
-                Given an array of N integers, remove all successive equal elements
-                (except for their first occurrence) from the array.
-                """);
+               Given an array of N integers, remove all equal elements (except for their first occurrence) from the array.
+               """);
 
         System.out.print("Enter the array size N:  ");
         int n = scanner.nextInt();
@@ -33,24 +29,21 @@ public class Solution095 {
 
     public static int[] removeSuccessiveEqualElements(int[] array) {
 
-        List<Integer> resultList = new ArrayList<>();
-        resultList.add(array[0]);
+        Set<Integer> occurred = new HashSet<>();
 
-        // Iterate through the array and add elements to the list
-        // only if they are different from the previous element
-        for (int i = 1; i < array.length; i++) {
-            if (array[i] != array[i - 1]) {
-                resultList.add(array[i]);
+
+        int uniqueCount = 0;
+
+        for (int i = 0; i < array.length; i++) {
+            if (!occurred.contains(array[i])) {
+                occurred.add(array[i]);
+                array[uniqueCount++] = array[i];
             }
         }
 
-        int[] resultArray = new int[resultList.size()];
-        for (int i = 0; i < resultList.size(); i++) {
-            resultArray[i] = resultList.get(i);
-        }
+        int[] resultArray = new int[uniqueCount];
+        System.arraycopy(array, 0, resultArray, 0, uniqueCount);
 
         return resultArray;
     }
-
-
 }
