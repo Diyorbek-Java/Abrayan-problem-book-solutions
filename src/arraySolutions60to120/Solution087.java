@@ -3,15 +3,15 @@ package arraySolutions60to120;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Solution076 {
+public class Solution087 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("""
-                Given an array of N real numbers, assign zero value to all its local maximums
-                (an array element is called the local maximum if it is greater than its neighbors).
+                An array of N real numbers is given. The values of all array elements, except the first one, are in ascending order.
+                Arrange all array elements in ascending order by moving the first element to a new position.
                 """);
 
-        System.out.print("Enter the array size N: ");
+        System.out.print("Enter the array size N:  ");
         int n = scanner.nextInt();
 
         double[] arrayA = new double[n];
@@ -21,7 +21,7 @@ public class Solution076 {
 
         scanner.close();
 
-        System.out.println("The array A is: ");
+        System.out.println("The given array is: ");
         System.out.println(Arrays.toString(arrayA));
 
         changeElements(arrayA);
@@ -32,11 +32,18 @@ public class Solution076 {
     }
 
     public static void changeElements(double[] array) {
-        for (int i = 1; i < array.length - 1; i++)
-            if (array[i] > array[i - 1] && array[i] < array[i + 1])
-                array[i] = 0;
+        double firstElement = array[0];
+        int n = array.length;
 
+        int insertIndex = 1;
+        while (insertIndex < n && array[insertIndex] < firstElement) {
+            insertIndex++;
+        }
+        for (int i = 0; i < insertIndex - 1; i++) {
+            array[i] = array[i + 1];
+        }
+
+        array[insertIndex - 1] = firstElement;
     }
-
 
 }

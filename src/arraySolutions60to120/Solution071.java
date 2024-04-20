@@ -15,7 +15,7 @@ public class Solution071 {
         double[] arrayA = new double[n];
         System.out.println("Enter elements of Array A: ");
         for (int i = 0; i < n; i++)
-            arrayA[i] = scanner.nextInt();
+            arrayA[i] = scanner.nextDouble();
 
         scanner.close();
 

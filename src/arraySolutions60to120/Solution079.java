@@ -3,15 +3,16 @@ package arraySolutions60to120;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Solution076 {
+public class Solution079 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("""
-                Given an array of N real numbers, assign zero value to all its local maximums
-                (an array element is called the local maximum if it is greater than its neighbors).
+                Given an array of N real numbers, perform the right shift of array elements on one position
+                by assigning initial values of A(1), A(2), …, A(N−1) to elements A(2), A(3), …, A(N) respectively
+                (an initial value of the last element will be lost). Assign zero value to the first element of the changed array.
                 """);
 
-        System.out.print("Enter the array size N: ");
+        System.out.print("Enter the array  ");
         int n = scanner.nextInt();
 
         double[] arrayA = new double[n];
@@ -32,10 +33,10 @@ public class Solution076 {
     }
 
     public static void changeElements(double[] array) {
-        for (int i = 1; i < array.length - 1; i++)
-            if (array[i] > array[i - 1] && array[i] < array[i + 1])
-                array[i] = 0;
-
+        for (int i = array.length - 1; i > 0; i--) {
+            array[i] = array[i - 1];
+        }
+        array[0] = 0;
     }
 
 

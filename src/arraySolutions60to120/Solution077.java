@@ -3,12 +3,12 @@ package arraySolutions60to120;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Solution076 {
+public class Solution077 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("""
-                Given an array of N real numbers, assign zero value to all its local maximums
-                (an array element is called the local maximum if it is greater than its neighbors).
+                Given an array of N real numbers, replace each local minimum with its square
+                (an array element is called the local minimum if it is smaller than its neighbors).
                 """);
 
         System.out.print("Enter the array size N: ");
@@ -33,8 +33,8 @@ public class Solution076 {
 
     public static void changeElements(double[] array) {
         for (int i = 1; i < array.length - 1; i++)
-            if (array[i] > array[i - 1] && array[i] < array[i + 1])
-                array[i] = 0;
+            if (array[i] < array[i - 1] && array[i] > array[i + 1])
+                array[i] = Math.pow(array[i], 2);
 
     }
 
