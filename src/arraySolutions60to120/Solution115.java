@@ -25,8 +25,10 @@ public class Solution115 {
 
         scanner.close();
 
-        int[] result = bubbleSortIndices(arrayA);
         System.out.println("The given array is: ");
+        System.out.println(Arrays.toString(arrayA));
+        int[] result = bubbleSortIndices(arrayA);
+        System.out.println("Sorted array A: ");
         System.out.println(Arrays.toString(result));
 
 
