@@ -1,6 +1,7 @@
 package arraySolutions120to140;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Solution124 {
@@ -19,60 +20,73 @@ public class Solution124 {
         for (int i = 0; i < n; i++)
             arrayA[i] = scanner.nextInt();
 
-        System.out.print("Enter Integer K");
+        System.out.print("Enter Integer K: ");
         int k = scanner.nextInt();
         scanner.close();
 
-        int[] modifiedArray = removeKthSeries(arrayA, k);
 
-
+        int[] result = exchangeSeries(arrayA, k);
         System.out.println("Modified array:");
-        for (int num : modifiedArray) {
+        for (int num : result) {
             System.out.print(num + " ");
         }
 
     }
 
-    public static int[] removeKthSeries(int[] array, int K) {
-        ArrayList<Integer> modifiedList = new ArrayList<>();
+    public static int[] exchangeSeries(int[] A, int K) {
+        List<int[]> series = findSeries(A);
 
-        int currentCount = 1;
-        int seriesStartIndex = 0;
+        if (series.size() < K) {
+            return A; // Do nothing if there are less than K series
+        }
 
-        // Iterate through the array
-        for (int i = 1; i < array.length; i++) {
-            // Check if the current element is equal to the previous element
-            if (array[i] == array[i - 1]) {
-                currentCount++;
+        // Find the indices of the last series and the K-th series
+        int lastSeriesIndex = series.size() - 1;
+        int kthSeriesIndex = K - 1;
+
+        // Find the starting and ending indices of the last and K-th series
+        int lastSeriesStart = sumLengths(series.subList(0, lastSeriesIndex));
+        int kthSeriesStart = sumLengths(series.subList(0, kthSeriesIndex));
+        int kthSeriesEnd = kthSeriesStart + series.get(kthSeriesIndex)[1];
+
+        // Exchange the elements of the last and K-th series
+        exchangeElements(A, lastSeriesStart, lastSeriesStart + series.get(lastSeriesIndex)[1],
+                A, kthSeriesStart, kthSeriesEnd);
+
+        return A;
+    }
+
+    public static List<int[]> findSeries(int[] A) {
+        List<int[]> series = new ArrayList<>();
+        int currentLength = 1;
+
+        for (int i = 1; i < A.length; i++) {
+            if (A[i] == A[i - 1]) {
+                currentLength++;
             } else {
-                // Check if this is the K-th series
-                if (currentCount >= 2 && array[i - 1] == array[seriesStartIndex] && K == 1) {
-                    // Skip appending elements of the K-th series
-                } else {
-                    // Add the elements of the current series to the modified list
-                    for (int j = seriesStartIndex; j < i; j++) {
-                        modifiedList.add(array[j]);
-                    }
-                }
-
-                // Update seriesStartIndex and currentCount for the next series
-                seriesStartIndex = i;
-                currentCount = 1;
+                series.add(new int[]{A[i - 1], currentLength});
+                currentLength = 1;
             }
         }
 
-        // Add the remaining elements of the last series to the modified list
-        for (int i = seriesStartIndex; i < array.length; i++) {
-            modifiedList.add(array[i]);
-        }
+        series.add(new int[]{A[A.length - 1], currentLength});
+        return series;
+    }
 
-        // Convert ArrayList to array
-        int[] modifiedArray = new int[modifiedList.size()];
-        for (int i = 0; i < modifiedList.size(); i++) {
-            modifiedArray[i] = modifiedList.get(i);
+    public static int sumLengths(List<int[]> series) {
+        int sum = 0;
+        for (int[] s : series) {
+            sum += s[1];
         }
+        return sum;
+    }
 
-        return modifiedArray;
+    public static void exchangeElements(int[] src, int srcStart, int srcEnd, int[] dest, int destStart, int destEnd) {
+        for (int i = srcStart, j = destStart; i < srcEnd && j < destEnd; i++, j++) {
+            int temp = src[i];
+            src[i] = dest[j];
+            dest[j] = temp;
+        }
     }
 
 }
